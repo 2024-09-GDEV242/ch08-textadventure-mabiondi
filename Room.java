@@ -91,7 +91,24 @@ public class Room
         }
         return returnString;
     }
-
+    
+    /**
+     * Return a string describing the items in the room, for example:
+     * "Items in room:
+     * the Blade of Zeltron
+     * cardboard box"
+     * 
+     * @return Descriptions of the items in the room
+     */
+    private String getItemString()
+    {
+        String returnString = "Items in room:";
+        for(Item item : items) {
+            returnString += "\n" + item.getDescription();
+        }
+        return returnString;
+    }
+    
     /**
      * Return the room that is reached if we go from this room in direction
      * "direction". If there is no room in that direction, return null.
