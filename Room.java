@@ -21,7 +21,7 @@ public class Room
 {
     private String description;
     private HashMap<String, Room> exits;        // stores exits of this room.
-    private Set<Item> items;                    // stores items in this room
+    private HashSet<Item> items;                    // stores items in this room
 
     /**
      * Create a room described "description". Initially, it has
@@ -45,7 +45,18 @@ public class Room
     {
         exits.put(direction, neighbor);
     }
-
+    
+    /**
+     * Add an item to this room.
+     * 
+     * @param description The description of the item
+     * @param weight The weight of the item in pounds
+     */
+    public void addItem(String description, double weight)
+    {
+        items.add(new Item(description, weight));
+    }
+    
     /**
      * @return The short description of the room
      * (the one that was defined in the constructor).
