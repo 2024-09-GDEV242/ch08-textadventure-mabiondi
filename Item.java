@@ -25,7 +25,7 @@ public class Item
      * 
      * @return The description of the item
      */
-    public String getItemDescription()
+    public String getDescription()
     {
         return description;
     }
@@ -35,7 +35,7 @@ public class Item
      *
      * @param newDescription The new description of the item
      */
-    public void setItemDescription(String newDescription)
+    public void setDescription(String newDescription)
     {
         description = newDescription;
     }
@@ -45,7 +45,7 @@ public class Item
      * 
      * @return The weight of the item in pounds
      */
-    public double getItemWeight()
+    public double getWeight()
     {
         return weight;
     }
@@ -55,7 +55,7 @@ public class Item
      *
      * @param newWeight The new weight of the item in pounds
      */
-    public void setItemWeight(double newWeight)
+    public void setWeight(double newWeight)
     {
         weight = newWeight;
     }
