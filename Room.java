@@ -74,7 +74,7 @@ public class Room
      */
     public String getLongDescription()
     {
-        return "You are " + description + ".\n" + getExitString();
+        return "You are " + description + ".\n" + getExitString() + "\n" + getItemString();
     }
 
     /**
@@ -104,7 +104,8 @@ public class Room
     {
         String returnString = "Items in room:";
         for(Item item : items) {
-            returnString += "\n" + item.getDescription();
+            String weightString = String.format("%.1f", item.getWeight());
+            returnString += "\n" + item.getDescription() + ", " + weightString + " lbs";
         }
         return returnString;
     }
