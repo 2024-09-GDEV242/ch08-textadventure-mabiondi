@@ -56,6 +56,10 @@ public class Game
         lab.setExit("east", office);
 
         office.setExit("west", lab);
+        
+        // add items
+        outside.addItem("thunder axe", 500.0);
+        outside.addItem("apple", 0.5);
 
         currentRoom = outside;  // start game outside
     }
