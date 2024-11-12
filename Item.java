@@ -6,18 +6,39 @@
  */
 public class Item
 {
+    private String name;
     private String description;
     private double weight;
 
     /**
      * Constructor for items
+     * @param name The short name of the item
      * @param description The description of the item
      * @param weight The weight of the item in pounds
      */
-    public Item(String description, double weight)
+    public Item(String name, String description, double weight)
     {
+        this.name = name;
         this.description = description;
         this.weight = weight;
+    }
+    
+    /**
+     * Return the short name of the item
+     */
+    public String getName()
+    {
+        return name;
+    }
+    
+    /**
+     * Set a new name for the item
+     * 
+     * @param newName The new name for the item
+     */
+    public void setName(String newName)
+    {
+        name = newName;
     }
     
     /**
