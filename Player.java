@@ -52,7 +52,7 @@ public class Player
         {
             if(itemName != item.getName())
             {
-                System.out.println("Error: Please name a valid item.");
+                System.out.println("You struggle to pick anything up.");
             }
             else {
                 inventory.add(item);
