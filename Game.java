@@ -1,4 +1,4 @@
-import java.util.Stack;
+
 
 /**
  *  This class is the main class of the "World of Zuul" application. 
@@ -20,8 +20,7 @@ import java.util.Stack;
 public class Game 
 {
     private Parser parser;
-    private Room currentRoom;
-    private Stack<Room> roomsSequence;
+    private Player player;
         
     /**
      * Create the game and initialise its internal map.
@@ -37,8 +36,6 @@ public class Game
      */
     private void createRooms()
     {
-        roomsSequence = new Stack<Room>();
-        
         Room outside, theater, pub, lab, office;
       
         // create the rooms
@@ -63,11 +60,10 @@ public class Game
         office.setExit("west", lab);
         
         // add items
-        outside.addItem("thunder axe", 500.0);
-        outside.addItem("apple", 0.5);
-
-        currentRoom = outside;  // start game outside
-        roomsSequence.push(currentRoom);
+        outside.addItem("thunder axe", "a majestic thunder axe", 500.0);
+        outside.addItem("apple", "an apple", 0.5);
+        
+        player = new Player(outside);
     }
 
     /**
@@ -171,14 +167,13 @@ public class Game
         String direction = command.getSecondWord();
 
         // Try to leave current room.
-        Room nextRoom = currentRoom.getExit(direction);
+        Room nextRoom = player.getCurrentRoom().getExit(direction);
 
         if (nextRoom == null) {
             System.out.println("There is no door!");
         }
         else {
-            currentRoom = nextRoom;
-            roomsSequence.push(currentRoom);
+            player.updateCurrentRoom(nextRoom);
             look();
         }
     }
@@ -188,7 +183,7 @@ public class Game
      */
     private void look()
     {
-        System.out.println(currentRoom.getLongDescription());
+        System.out.println(player.getCurrentRoom().getLongDescription());
     }
     
     /**
@@ -196,13 +191,9 @@ public class Game
      */
     private void back()
     {
-        if (roomsSequence.size() > 1) {
-            roomsSequence.pop();
-            currentRoom = roomsSequence.peek();
+        if(player.back())
+        {
             look();
-        }
-        else {
-            System.out.println("You are already at the starting location and cannot go back further.");
         }
     }
     

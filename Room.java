@@ -52,9 +52,9 @@ public class Room
      * @param description The description of the item
      * @param weight The weight of the item in pounds
      */
-    public void addItem(String description, double weight)
+    public void addItem(String name, String description, double weight)
     {
-        items.add(new Item(description, weight));
+        items.add(new Item(name, description, weight));
     }
     
     /**
