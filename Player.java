@@ -84,8 +84,8 @@ public class Player
                 System.out.println("You picked up " + item.getDescription() + "!");
                 return;
             }
-            System.out.println("You struggle to pick anything up.");
         }
+        System.out.println("You struggle to pick anything up.");
     }
     
     /**
@@ -105,8 +105,8 @@ public class Player
                 System.out.println("You dropped " + item.getDescription() + ".");
                 return;
             }
-            System.out.println("You can't let go.");
         }
+        System.out.println("You can't let go.");
     }
     
     /**
