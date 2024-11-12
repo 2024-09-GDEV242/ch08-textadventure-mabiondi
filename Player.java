@@ -77,7 +77,7 @@ public class Player
     {
         for(Item item : currentRoom.getItems())
         {
-            if(itemName == item.getName())
+            if(itemName.equals(item.getName()))
             {
                 inventory.add(item);
                 currentRoom.removeItem(item);
@@ -98,7 +98,7 @@ public class Player
     {
         for(Item item : inventory)
         {
-            if(itemName == item.getName())
+            if(itemName.equals(item.getName()))
             {
                 currentRoom.addItem(item);
                 inventory.remove(item);
