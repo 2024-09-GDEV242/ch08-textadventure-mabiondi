@@ -192,7 +192,15 @@ public class Game
     private void look()
     {
         System.out.println(player.getCurrentRoom().getLongDescription());
-        System.out.println(player.getItemString());
+        System.out.println(player.items());
+    }
+    
+    /**
+     * Print out information about all of the items in the player's inventory.
+     */
+    private void items()
+    {
+        System.out.println(player.items());
     }
     
     /**

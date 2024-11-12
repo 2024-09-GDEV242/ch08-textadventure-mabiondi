@@ -55,7 +55,7 @@ public class Player
      * 
      * @return Info about the items in the player's inventory
      */
-    public String getItemString()
+    public String items()
     {
         String returnString = "Items in Inventory:";
         for(Item item : inventory) {
