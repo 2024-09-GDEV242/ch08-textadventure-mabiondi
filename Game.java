@@ -1,5 +1,3 @@
-
-
 /**
  *  This class is the main class of the "World of Zuul" application. 
  *  "World of Zuul" is a very simple, text based adventure game.  Users 
@@ -14,7 +12,7 @@
  *  executes the commands that the parser returns.
  * 
  * @author  Michael Kölling and David J. Barnes, updated by Michael Biondi
- * @version 2024.11.10
+ * @version 2024.11.12
  */
 
 public class Game 
@@ -234,6 +232,10 @@ public class Game
         player.pickUpItem(itemToTake);
     }
     
+    /**
+     * Drop the item named in the command in the current room,
+     * if the item named is the name of an item in the player's inventory
+     */
     private void drop(Command command)
     {
         if(!command.hasSecondWord()) {

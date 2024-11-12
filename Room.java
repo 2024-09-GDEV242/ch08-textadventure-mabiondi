@@ -14,7 +14,7 @@ import java.util.Iterator;
  * stores a reference to the neighboring room.
  * 
  * @author  Michael Kölling and David J. Barnes, updated by Michael Biondi
- * @version 2024.11.10
+ * @version 2024.11.12
  */
 
 public class Room 

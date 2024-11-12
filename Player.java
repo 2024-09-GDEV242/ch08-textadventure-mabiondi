@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * and what items they are currently holding.
  *
  * @author Michael Biondi
- * @version 2024.11.11
+ * @version 2024.11.12
  */
 public class Player
 {

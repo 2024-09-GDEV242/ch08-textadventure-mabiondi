@@ -2,7 +2,7 @@
  * An item, multiple of which can be stored in a room.
  *
  * @author Michael Biondi
- * @version 2024.11.10
+ * @version 2024.11.12
  */
 public class Item
 {
