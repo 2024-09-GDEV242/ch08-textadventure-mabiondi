@@ -93,6 +93,24 @@ public class Room
     }
     
     /**
+     * Return the HashSet of items in the room
+     */
+    public HashSet<Item> getItems()
+    {
+        return items;
+    }
+    
+    /**
+     * Remove the specified item from the room
+     * 
+     * @param itemToRemove The Item to be removed from the room
+     */
+    public void removeItem(Item itemToRemove)
+    {
+        items.remove(itemToRemove);
+    }
+    
+    /**
      * Return a string describing the items in the room, for example:
      * "Items in room:
      * the Blade of Zeltron
@@ -105,7 +123,9 @@ public class Room
         String returnString = "Items in room:";
         for(Item item : items) {
             String weightString = String.format("%.1f", item.getWeight());
-            returnString += "\n" + item.getDescription() + ", " + weightString + " lbs";
+            returnString +=
+            "\n" + item.getDescription() + " (" + item.getName() + "), "
+            + weightString + " lbs";
         }
         return returnString;
     }

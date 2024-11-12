@@ -124,6 +124,12 @@ public class Game
             case LOOK:
                 look();
                 break;
+            
+            case TAKE:
+                take(command);
+                break;
+            
+            
                 
             case BACK:
                 back();
@@ -185,6 +191,23 @@ public class Game
     {
         System.out.println(player.getCurrentRoom().getLongDescription());
     }
+    
+    /**
+     * Take the item mentioned in the command if it is an item in the room.
+     */
+    private void take(Command command)
+    {
+        if(!command.hasSecondWord()) {
+            System.out.println("Pick up what?");
+            return;
+        }
+        
+        String itemToTake = command.getSecondWord();
+        
+        player.pickUpItem(itemToTake);
+    }
+    
+    drop
     
     /**
      * Go back to the previous room.

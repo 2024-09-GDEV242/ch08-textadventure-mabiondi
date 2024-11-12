@@ -1,4 +1,5 @@
 import java.util.Stack;
+import java.util.ArrayList;
 
 /**
  * The player of the game, including what room
@@ -12,6 +13,7 @@ public class Player
 {
     private Room currentRoom;
     private Stack<Room> roomsSequence;
+    private ArrayList<Item> inventory;
 
     /**
      * Constructor to init the player in a specified room
@@ -22,6 +24,7 @@ public class Player
     {
         currentRoom = startingRoom;
         roomsSequence = new Stack<Room>();
+        inventory = new ArrayList<Item>();
     }
     
     /**
@@ -41,6 +44,22 @@ public class Player
     {
         currentRoom = nextRoom;
         roomsSequence.push(currentRoom);
+    }
+    
+    public void pickUpItem(String itemName)
+    {
+        for(Item item : currentRoom.getItems())
+        {
+            if(itemName != item.getName())
+            {
+                System.out.println("Error: Please name a valid item.");
+            }
+            else {
+                inventory.add(item);
+                currentRoom.removeItem(item);
+                System.out.println("You picked up " + item.getDescription() + "!");
+            }
+        }
     }
     
     /**
