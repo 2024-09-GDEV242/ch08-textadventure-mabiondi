@@ -47,7 +47,7 @@ public class Player
      * Takes the player back one room. Returns
      * whether back was successful or not.
      * 
-     * @return Whether the player wa sable to be taken back or not.
+     * @return Whether the player was able to be taken back or not.
      */
     public boolean back()
     {
