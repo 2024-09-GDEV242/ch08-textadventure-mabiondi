@@ -101,6 +101,16 @@ public class Room
     }
     
     /**
+     * Add an item to the room
+     * 
+     * @param itemToAdd The Item to be added to the room
+     */
+    public void addItem(Item itemToAdd)
+    {
+        items.add(itemToAdd);
+    }
+    
+    /**
      * Remove the specified item from the room
      * 
      * @param itemToRemove The Item to be removed from the room

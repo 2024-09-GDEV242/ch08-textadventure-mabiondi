@@ -62,6 +62,22 @@ public class Player
         }
     }
     
+    public void dropItem(String itemName)
+    {
+        for(Item item : currentRoom.getItems())
+        {
+            if(itemName != item.getName())
+            {
+                System.out.println("You can't let go.");
+            }
+            else {
+                inventory.remove(item);
+                currentRoom.addItem(item);
+                System.out.println("You dropped " + item.getDescription() + ".");
+            }
+        }
+    }
+    
     /**
      * Takes the player back one room. Returns
      * whether back was successful or not.

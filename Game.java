@@ -129,7 +129,9 @@ public class Game
                 take(command);
                 break;
             
-            
+            case DROP:
+                drop(command);
+                break;
                 
             case BACK:
                 back();
@@ -207,7 +209,17 @@ public class Game
         player.pickUpItem(itemToTake);
     }
     
-    drop
+    private void drop(Command command)
+    {
+        if(!command.hasSecondWord()) {
+            System.out.println("Drop what?");
+            return;
+        }
+        
+        String itemToDrop = command.getSecondWord();
+        
+        player.dropItem(itemToDrop);
+    }
     
     /**
      * Go back to the previous room.
