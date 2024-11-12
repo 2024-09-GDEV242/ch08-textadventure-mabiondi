@@ -1,0 +1,7 @@
+8.14 - look command
+8.22 - Rooms can hold multiple Items
+8.26 - back command can go back as many Rooms as possible (using a Stack)
+8.30 - a Player can pick up any number of Items
+
+Extra Credit:
+8.32 - items command that prints out all Items the Player currently carries and their weights

@@ -11,14 +11,14 @@
  *  rooms, creates the parser and starts the game.  It also evaluates and
  *  executes the commands that the parser returns.
  * 
- * @author  Michael Kölling and David J. Barnes
- * @version 2016.02.29
+ * @author  Michael Kölling and David J. Barnes, updated by Michael Biondi
+ * @version 2024.11.12
  */
 
 public class Game 
 {
     private Parser parser;
-    private Room currentRoom;
+    private Player player;
         
     /**
      * Create the game and initialise its internal map.
@@ -34,30 +34,48 @@ public class Game
      */
     private void createRooms()
     {
-        Room outside, theater, pub, lab, office;
+        Room bedroom, livingRoom, kitchen, outside, station, train, city, dome;
       
         // create the rooms
-        outside = new Room("outside the main entrance of the university");
-        theater = new Room("in a lecture theater");
-        pub = new Room("in the campus pub");
-        lab = new Room("in a computing lab");
-        office = new Room("in the computing admin office");
+        bedroom = new Room("in your childhood bedroom, where you always hoped that one day you would amount to something greater");
+        livingRoom = new Room("in the living room");
+        kitchen = new Room("in the family kitchen. Usually, there's some snacks left on the table");
+        outside = new Room("outside");
+        station = new Room("at your local subway station");
+        train = new Room("on a crowded, noisy subway train");
+        city = new Room("in the middle of a sprawling uptopia, with dizzyingly tall skyscrapers and flying cars whizzing by");
+        dome = new Room("in a giant, imposing glass DOME, full of other penguins pummeling each other with the most comical of weapons");
         
         // initialise room exits
-        outside.setExit("east", theater);
-        outside.setExit("south", lab);
-        outside.setExit("west", pub);
-
-        theater.setExit("west", outside);
-
-        pub.setExit("east", outside);
-
-        lab.setExit("north", outside);
-        lab.setExit("east", office);
-
-        office.setExit("west", lab);
-
-        currentRoom = outside;  // start game outside
+        bedroom.setExit("downstairs", livingRoom);
+        
+        livingRoom.setExit("upstairs", bedroom);
+        livingRoom.setExit("ahead", kitchen);
+        
+        kitchen.setExit("lounge", livingRoom);
+        kitchen.setExit("outside", outside);
+        
+        outside.setExit("away", station);
+        outside.setExit("inside", kitchen);
+        
+        station.setExit("choochoo", train);
+        station.setExit("outside", outside);
+        
+        train.setExit("off", city);
+        train.setExit("station", station);
+        
+        city.setExit("north", dome);
+        city.setExit("underground", train);
+        
+        dome.setExit("south", city);
+        
+        // add items
+        bedroom.addItem("coffee", "a coffee mug", 1.0);
+        kitchen.addItem("chips", "a bag of chips", 0.2);
+        station.addItem("guitar", "an acoustic guitar, probably left behind by your friend Dave", 3.5);
+        train.addItem("sword", "the Master Sword? THE Master Sword? Left behind on a train? Well this is getting ridiculous", 10.0);
+        
+        player = new Player(bedroom);
     }
 
     /**
@@ -84,11 +102,11 @@ public class Game
     private void printWelcome()
     {
         System.out.println();
-        System.out.println("Welcome to the World of Zuul!");
-        System.out.println("World of Zuul is a new, incredibly boring adventure game.");
+        System.out.println("Welcome to PENGUIN DOME");
+        System.out.println("PENGUIN DOME is an absolutely ludicrous text-based adventure game.");
         System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
         System.out.println();
-        System.out.println(currentRoom.getLongDescription());
+        look();
     }
 
     /**
@@ -114,6 +132,22 @@ public class Game
             case GO:
                 goRoom(command);
                 break;
+                
+            case LOOK:
+                look();
+                break;
+            
+            case TAKE:
+                take(command);
+                break;
+            
+            case DROP:
+                drop(command);
+                break;
+                
+            case BACK:
+                back();
+                break;
 
             case QUIT:
                 wantToQuit = quit(command);
@@ -131,8 +165,10 @@ public class Game
      */
     private void printHelp() 
     {
-        System.out.println("You are lost. You are alone. You wander");
-        System.out.println("around at the university.");
+        System.out.println("You are a penguin. You've always aspired to become");
+        System.out.println("one of the great gladiators of the PENGUIN DOME");
+        System.out.println("who fight each other honorably, with some of the");
+        System.out.println("wackiest weapons known to penguinkind.");
         System.out.println();
         System.out.println("Your command words are:");
         parser.showCommands();
@@ -153,17 +189,76 @@ public class Game
         String direction = command.getSecondWord();
 
         // Try to leave current room.
-        Room nextRoom = currentRoom.getExit(direction);
+        Room nextRoom = player.getCurrentRoom().getExit(direction);
 
         if (nextRoom == null) {
             System.out.println("There is no door!");
         }
         else {
-            currentRoom = nextRoom;
-            System.out.println(currentRoom.getLongDescription());
+            player.updateCurrentRoom(nextRoom);
+            look();
         }
     }
-
+    
+    /**
+     * Print out the long description of the current room.
+     */
+    private void look()
+    {
+        System.out.println(player.getCurrentRoom().getLongDescription());
+        System.out.println(player.items());
+    }
+    
+    /**
+     * Print out information about all of the items in the player's inventory.
+     */
+    private void items()
+    {
+        System.out.println(player.items());
+    }
+    
+    /**
+     * Take the item mentioned in the command if it is an item in the room.
+     */
+    private void take(Command command)
+    {
+        if(!command.hasSecondWord()) {
+            System.out.println("Pick up what?");
+            return;
+        }
+        
+        String itemToTake = command.getSecondWord();
+        
+        player.pickUpItem(itemToTake);
+    }
+    
+    /**
+     * Drop the item named in the command in the current room,
+     * if the item named is the name of an item in the player's inventory
+     */
+    private void drop(Command command)
+    {
+        if(!command.hasSecondWord()) {
+            System.out.println("Drop what?");
+            return;
+        }
+        
+        String itemToDrop = command.getSecondWord();
+        
+        player.dropItem(itemToDrop);
+    }
+    
+    /**
+     * Go back to the previous room.
+     */
+    private void back()
+    {
+        if(player.back())
+        {
+            look();
+        }
+    }
+    
     /** 
      * "Quit" was entered. Check the rest of the command to see
      * whether we really quit the game.
