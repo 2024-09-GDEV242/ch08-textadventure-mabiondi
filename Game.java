@@ -30,7 +30,6 @@ public class Game
     {
         createRooms();
         parser = new Parser();
-        roomsSequence = new Stack<Room>();
     }
 
     /**
@@ -38,6 +37,8 @@ public class Game
      */
     private void createRooms()
     {
+        roomsSequence = new Stack<Room>();
+        
         Room outside, theater, pub, lab, office;
       
         // create the rooms
@@ -195,9 +196,14 @@ public class Game
      */
     private void back()
     {
-        roomsSequence.pop();
-        currentRoom = roomsSequence.peek();
-        look();
+        if (roomsSequence.size() > 1) {
+            roomsSequence.pop();
+            currentRoom = roomsSequence.peek();
+            look();
+        }
+        else {
+            System.out.println("You are already at the starting location and cannot go back further.");
+        }
     }
     
     /** 
