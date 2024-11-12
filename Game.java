@@ -60,7 +60,7 @@ public class Game
         office.setExit("west", lab);
         
         // add items
-        outside.addItem("thunder axe", "a majestic thunder axe", 500.0);
+        outside.addItem("axe", "a majestic thunder axe", 500.0);
         outside.addItem("apple", "an apple", 0.5);
         
         player = new Player(outside);
