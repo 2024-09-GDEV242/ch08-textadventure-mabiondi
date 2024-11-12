@@ -192,6 +192,7 @@ public class Game
     private void look()
     {
         System.out.println(player.getCurrentRoom().getLongDescription());
+        System.out.println(player.getItemString());
     }
     
     /**

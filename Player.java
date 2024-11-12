@@ -46,6 +46,26 @@ public class Player
         roomsSequence.push(currentRoom);
     }
     
+    /**
+     * Returns a string describing the items in the player's inventory, for example:
+     * "Items in Inventory:
+     * the Blade of Zeltron (zeltron), 2000.0 lbs
+     * cardboard box (box), 0.1 lbs"
+     * 
+     * @return Info about the items in the player's inventory
+     */
+    public String getItemString()
+    {
+        String returnString = "Items in Inventory:";
+        for(Item item : inventory) {
+            String weightString = String.format("%.1f", item.getWeight());
+            returnString +=
+            "\n" + item.getDescription() + " (" + item.getName() + "), "
+            + weightString + " lbs";
+        }
+        return returnString;
+    }
+    
     public void pickUpItem(String itemName)
     {
         for(Item item : currentRoom.getItems())

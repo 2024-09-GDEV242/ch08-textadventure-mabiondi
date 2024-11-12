@@ -121,12 +121,12 @@ public class Room
     }
     
     /**
-     * Return a string describing the items in the room, for example:
+     * Returns a string describing the items in the room, for example:
      * "Items in room:
-     * the Blade of Zeltron
-     * cardboard box"
+     * the Blade of Zeltron (zeltron), 2000.0 lbs
+     * cardboard box (box), 0.1 lbs"
      * 
-     * @return Descriptions of the items in the room
+     * @return Info about the items in the room
      */
     private String getItemString()
     {
