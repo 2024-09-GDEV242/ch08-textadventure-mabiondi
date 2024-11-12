@@ -24,6 +24,7 @@ public class Player
     {
         currentRoom = startingRoom;
         roomsSequence = new Stack<Room>();
+        roomsSequence.push(startingRoom);
         inventory = new ArrayList<Item>();
     }
     
@@ -66,35 +67,45 @@ public class Player
         return returnString;
     }
     
+    /**
+     * Removes the named item from the player's
+     * current room and adds it to their inventory.
+     * 
+     * @param itemName The short name of the item to be picked up.
+     */
     public void pickUpItem(String itemName)
     {
         for(Item item : currentRoom.getItems())
         {
-            if(itemName != item.getName())
+            if(itemName == item.getName())
             {
-                System.out.println("You struggle to pick anything up.");
-            }
-            else {
                 inventory.add(item);
                 currentRoom.removeItem(item);
                 System.out.println("You picked up " + item.getDescription() + "!");
+                return;
             }
+            System.out.println("You struggle to pick anything up.");
         }
     }
     
+    /**
+     * Removes the named item from the player's
+     * inventory and adds it to their current room.
+     * 
+     * @param itemName The short name of the item to be picked up.
+     */
     public void dropItem(String itemName)
     {
-        for(Item item : currentRoom.getItems())
+        for(Item item : inventory)
         {
-            if(itemName != item.getName())
+            if(itemName == item.getName())
             {
-                System.out.println("You can't let go.");
-            }
-            else {
-                inventory.remove(item);
                 currentRoom.addItem(item);
+                inventory.remove(item);
                 System.out.println("You dropped " + item.getDescription() + ".");
+                return;
             }
+            System.out.println("You can't let go.");
         }
     }
     
